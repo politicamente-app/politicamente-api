@@ -2,6 +2,7 @@
 venv/
 .venv/
 env/
+.venv_api/
 
 # Arquivos de ambiente (SEGURANÇA!)
 .env
