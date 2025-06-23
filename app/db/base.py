@@ -1,4 +1,4 @@
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:07:40
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:19:51
 
 from app.db.base_class import Base
 from app.db.session import engine
