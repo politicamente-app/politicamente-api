@@ -1,5 +1,3 @@
-<!-- Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:36:49 -->
-
 <!-- Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:38:15 -->
 
 # PoliticaMente API
@@ -45,7 +43,7 @@ Siga estas instruções para ter uma cópia do projeto funcionando na sua máqui
     * Crie um arquivo chamado `.env` na pasta raiz do projeto.
     * Dentro dele, adicione sua string de conexão do Supabase e as configurações de segurança:
         ```
-        DATABASE_URL="postgresql://postgres.[SEU_ID]:[SUA_SENHA]@[aws-0-sa-east-1.pooler.supabase.com:5432/postgres](https://aws-0-sa-east-1.pooler.supabase.com:5432/postgres)"
+        DATABASE_URL="postgre_connection_string"
 
         # Execute `openssl rand -hex 32` no terminal para gerar uma chave segura
         SECRET_KEY="sua_chave_secreta_aqui"
