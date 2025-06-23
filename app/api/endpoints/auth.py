@@ -1,13 +1,13 @@
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:30:17
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:36:49
 
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:32:04
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:38:15
 
 from fastapi import APIRouter, status, Depends, HTTPException
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm
 
-from app.schemas.user import UserCreate, UserResponse, Token
-from app.repository import user as user_repository
+from app.schemas.user import UserCreate, UserResponse, Token, UserDataExport
+from app.repository import user as user_repository, vote as vote_repository
 from app.db.session import get_db
 from app.core.security import verify_password, create_access_token, get_current_user
 from app.models.user import User
@@ -64,3 +64,21 @@ def delete_current_user(
     """
     deleted_user = user_repository.remove(db=db, id=current_user.user_id)
     return deleted_user
+
+@router.get("/users/me/data", response_model=UserDataExport, summary="Exportar dados do usuário")
+def export_user_data(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """
+    Retorna um compilado de todos os dados do usuário logado (perfil e votos),
+    em conformidade com a LGPD.
+    """
+    user_votes = vote_repository.get_multi_by_owner(db=db, user_id=current_user.user_id)
+
+    # Monta o objeto de exportação
+    user_data_export = {
+        "profile": current_user,
+        "votes": user_votes
+    }
+    return user_data_export

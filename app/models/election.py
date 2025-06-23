@@ -1,6 +1,6 @@
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:30:17
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:36:49
 
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:32:04
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:38:15
 
 from sqlalchemy import Column, String, Integer, Date
 from app.db.base_class import Base
