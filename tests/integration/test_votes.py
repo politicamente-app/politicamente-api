@@ -1,6 +1,6 @@
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:27:01
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:30:17
 
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:29:13
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:32:04
 
 from fastapi.testclient import TestClient
 from app.main import app
@@ -8,7 +8,7 @@ import uuid
 
 client = TestClient(app)
 
-def get_user_token(client: TestClient) -> str:
+def get_user_token_for_votes(client: TestClient) -> str:
     """Função auxiliar para registrar e logar um usuário para obter um token."""
     email = f"test.votes.{uuid.uuid4()}@example.com"
     password = "password123"
@@ -17,7 +17,7 @@ def get_user_token(client: TestClient) -> str:
     return response.json()["access_token"]
 
 def test_vote_crud_flow():
-    token = get_user_token(client)
+    token = get_user_token_for_votes(client)
     headers = {"Authorization": f"Bearer {token}"}
 
     # Mock data - em um teste real, criaríamos esses dados no DB

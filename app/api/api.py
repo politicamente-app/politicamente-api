@@ -1,6 +1,6 @@
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:27:00
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:30:17
 
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:29:13
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:32:04
 
 from fastapi import APIRouter
 from app.api.endpoints import auth, votes

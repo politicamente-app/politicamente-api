@@ -1,6 +1,6 @@
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:27:00
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:30:17
 
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:29:13
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:32:04
 
 from fastapi import APIRouter, status, Depends, HTTPException
 from sqlalchemy.orm import Session
@@ -53,3 +53,14 @@ def login_for_access_token(db: Session = Depends(get_db), form_data: OAuth2Passw
 )
 def read_users_me(current_user: User = Depends(get_current_user)):
     return current_user
+
+@router.delete("/users/me", response_model=UserResponse, summary="Deletar conta do usuário")
+def delete_current_user(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """
+    Deleta a conta e todos os dados do usuário autenticado.
+    """
+    deleted_user = user_repository.remove(db=db, id=current_user.user_id)
+    return deleted_user

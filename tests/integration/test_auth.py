@@ -1,6 +1,6 @@
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:27:01
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:30:17
 
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:29:13
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:32:04
 
 from fastapi.testclient import TestClient
 from app.main import app
@@ -8,28 +8,47 @@ import uuid
 
 client = TestClient(app)
 
-def test_full_auth_flow():
-    unique_email = f"test.user.flow.{uuid.uuid4()}@example.com"
+def get_user_token(client: TestClient) -> dict:
+    """Função auxiliar para registrar e logar um usuário para obter um token."""
+    email = f"test.auth.flow.{uuid.uuid4()}@example.com"
     password = "password123"
 
-    response = client.post(
-        "/auth/register",
-        json={"full_name": "Test Flow User", "email": unique_email, "password": password},
-    )
-    assert response.status_code == 201, response.text
+    client.post("/auth/register", json={"full_name": "Test Auth User", "email": email, "password": password})
+    response = client.post("/auth/login", data={"username": email, "password": password})
 
-    response = client.post(
-        "/auth/login",
-        data={"username": unique_email, "password": password},
-    )
-    assert response.status_code == 200, response.text
     token_data = response.json()
-    access_token = token_data["access_token"]
+    return {"token": token_data["access_token"], "email": email}
+
+
+def test_full_auth_flow():
+    auth_data = get_user_token(client)
+    token = auth_data["token"]
+    email = auth_data["email"]
 
     response = client.get(
         "/auth/users/me",
-        headers={"Authorization": f"Bearer {access_token}"},
+        headers={"Authorization": f"Bearer {token}"},
     )
     assert response.status_code == 200, response.text
     user_data = response.json()
-    assert user_data["email"] == unique_email
+    assert user_data["email"] == email
+
+def test_delete_user():
+    auth_data = get_user_token(client)
+    token = auth_data["token"]
+    email = auth_data["email"]
+
+    # Deleta o usuário
+    response_delete = client.delete(
+        "/auth/users/me",
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert response_delete.status_code == 200
+    assert response_delete.json()["email"] == email
+
+    # Tenta fazer login novamente (deve falhar)
+    response_login_fail = client.post(
+        "/auth/login",
+        data={"username": email, "password": "password123"},
+    )
+    assert response_login_fail.status_code == 401

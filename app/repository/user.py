@@ -1,8 +1,9 @@
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:27:01
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:30:17
 
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:29:13
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:32:04
 
 from sqlalchemy.orm import Session
+import uuid
 from app.models.user import User
 from app.schemas.user import UserCreate
 from app.core.security import get_password_hash
@@ -21,3 +22,10 @@ def create(db: Session, user: UserCreate) -> User:
     db.commit()
     db.refresh(db_user)
     return db_user
+
+def remove(db: Session, *, id: uuid.UUID) -> User | None:
+    obj = db.query(User).get(id)
+    if obj:
+        db.delete(obj)
+        db.commit()
+    return obj
