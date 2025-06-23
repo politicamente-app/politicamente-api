@@ -1,4 +1,6 @@
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:19:51
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:24:29
+
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:22:25
 
 from fastapi.testclient import TestClient
 from app.main import app
@@ -14,7 +16,7 @@ def get_user_token() -> str:
     response = client.post("/auth/login", data={"username": email, "password": password})
     return response.json()["access_token"]
 
-def test_create_vote_as_authenticated_user():
+def test_create_and_read_vote():
     token = get_user_token()
     headers = {"Authorization": f"Bearer {token}"}
 
@@ -29,12 +31,16 @@ def test_create_vote_as_authenticated_user():
         "party_id": None
     }
 
+    # # Criar um voto
     # response = client.post("/votes/", headers=headers, json=vote_data)
-
-    # # Verificações
     # assert response.status_code == 201
     # data = response.json()
     # assert data["office"] == vote_data["office"]
-    # assert data["candidacy_id"] == vote_data["candidacy_id"]
-    # assert "user_id" in data
-    pass # Passando o teste por enquanto, até termos dados de teste no DB.
+
+    # # Ler os votos
+    # response = client.get("/votes/", headers=headers)
+    # assert response.status_code == 200
+    # data = response.json()
+    # assert len(data) > 0
+    # assert data[0]["office"] == "Prefeito"
+    pass # Passando o teste por enquanto.

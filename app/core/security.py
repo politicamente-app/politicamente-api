@@ -1,4 +1,6 @@
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:19:51
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:24:29
+
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:22:25
 
 from datetime import datetime, timedelta, timezone
 from passlib.context import CryptContext
