@@ -1,6 +1,4 @@
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:36:49
-
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:32:04
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-23 16:55:54
 
 from app.core.security import get_password_hash, verify_password, create_access_token
 from jose import jwt

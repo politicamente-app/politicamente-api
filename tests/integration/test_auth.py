@@ -1,6 +1,4 @@
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:36:49
-
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:38:15
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-23 16:55:54
 
 from fastapi.testclient import TestClient
 from app.main import app
@@ -18,6 +16,7 @@ def get_user_token(client: TestClient) -> dict:
 
     token_data = response.json()
     return {"token": token_data["access_token"], "email": email}
+
 
 def test_full_auth_flow():
     auth_data = get_user_token(client)
@@ -59,13 +58,6 @@ def test_export_user_data():
 
     headers = {"Authorization": f"Bearer {token}"}
 
-    # Adiciona um voto para o usuário
-    # Nota: Este teste assume que já existem dados de teste no banco (eleicao 1)
-    # response_vote = client.post("/votes/", headers=headers, json={
-    #     "election_id": 1, "office": "Presidente", "vote_type": "BLANK"
-    # })
-    # assert response_vote.status_code == 201
-
     # Exporta os dados
     response_export = client.get("/auth/users/me/data", headers=headers)
     assert response_export.status_code == 200
@@ -73,4 +65,3 @@ def test_export_user_data():
     data = response_export.json()
     assert data["profile"]["email"] == email
     assert "votes" in data
-    # assert len(data["votes"]) > 0  # Descomentar quando os dados de teste forem semeados

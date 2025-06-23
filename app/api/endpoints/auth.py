@@ -1,6 +1,4 @@
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:36:49
-
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:38:15
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-23 16:55:54
 
 from fastapi import APIRouter, status, Depends, HTTPException
 from sqlalchemy.orm import Session
@@ -76,7 +74,6 @@ def export_user_data(
     """
     user_votes = vote_repository.get_multi_by_owner(db=db, user_id=current_user.user_id)
 
-    # Monta o objeto de exportação
     user_data_export = {
         "profile": current_user,
         "votes": user_votes
