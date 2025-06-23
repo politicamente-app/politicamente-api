@@ -1,3 +1,5 @@
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:07:40
+
 from fastapi import APIRouter, status, Depends, HTTPException
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm
@@ -17,18 +19,13 @@ router = APIRouter()
     summary="Registrar novo usuário"
 )
 def register_new_user(user_data: UserCreate, db: Session = Depends(get_db)):
-    """
-    Endpoint para registrar um novo usuário no sistema.
-    """
     db_user = user_repository.get_by_email(db, email=user_data.email)
     if db_user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Email already registered",
         )
-
     new_user = user_repository.create(db=db, user=user_data)
-
     return new_user
 
 @router.post(
@@ -37,23 +34,14 @@ def register_new_user(user_data: UserCreate, db: Session = Depends(get_db)):
     summary="Login do usuário"
 )
 def login_for_access_token(db: Session = Depends(get_db), form_data: OAuth2PasswordRequestForm = Depends()):
-    """
-    Autentica um usuário e retorna um token de acesso JWT.
-
-    O FastAPI usa o OAuth2PasswordRequestForm para esperar um corpo de formulário com 'username' e 'password'.
-    O 'username' neste caso será o nosso e-mail.
-    """
     user = user_repository.get_by_email(db, email=form_data.username)
-
     if not user or not verify_password(form_data.password, user.hashed_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect email or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-
     access_token = create_access_token(data={"sub": user.email})
-
     return {"access_token": access_token, "token_type": "bearer"}
 
 @router.get(
@@ -62,7 +50,4 @@ def login_for_access_token(db: Session = Depends(get_db), form_data: OAuth2Passw
     summary="Obter usuário atual"
 )
 def read_users_me(current_user: User = Depends(get_current_user)):
-    """
-    Endpoint protegido que retorna os dados do usuário logado.
-    """
     return current_user

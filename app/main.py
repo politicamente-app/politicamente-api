@@ -1,9 +1,10 @@
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:07:40
+
 from fastapi import FastAPI
 from app.api.api import api_router
-from app.db import base
+from app.db.base import Base, engine
 
-# Cria todas as tabelas no banco de dados (se não existirem)
-base.Base.metadata.create_all(bind=base.engine)
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="PoliticaMente API",
@@ -15,5 +16,4 @@ app.include_router(api_router)
 
 @app.get("/", tags=["Root"])
 def read_root():
-    """Endpoint inicial para verificar se a API está no ar."""
     return {"message": "Bem-vindo à API do PoliticaMente"}

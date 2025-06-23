@@ -1,5 +1,12 @@
-# Este arquivo é usado para inicializar o banco de dados e garantir
-# que o SQLAlchemy conheça todos os nossos modelos e a engine.
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:07:40
+
 from app.db.base_class import Base
-from app.models.user import User
 from app.db.session import engine
+
+# Importe todos os modelos aqui para que o `create_all` os conheça
+from app.models.user import User
+from app.models.party import Party
+from app.models.politician import Politician
+from app.models.election import Election
+from app.models.candidacy import Candidacy
+from app.models.vote import Vote

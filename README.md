@@ -1,3 +1,5 @@
+<!-- Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-22 23:07:40 -->
+
 # PoliticaMente API
 
 Este é o repositório do backend para a plataforma **PoliticaMente**. Construído com FastAPI e Python, este serviço é responsável por toda a lógica de negócio, segurança e gestão de dados da aplicação.
@@ -32,7 +34,7 @@ Siga estas instruções para ter uma cópia do projeto funcionando na sua máqui
 3.  **Instale as dependências:**
     ```sh
     # Dependências da Aplicação
-    pip install fastapi "uvicorn[standard]" "pydantic[email]" "passlib[bcrypt]" sqlalchemy psycopg2-binary python-dotenv pydantic-settings "python-jose[cryptography]"
+    pip install fastapi "uvicorn[standard]" "pydantic[email]" "passlib[bcrypt]" sqlalchemy psycopg2-binary python-dotenv pydantic-settings "python-jose[cryptography]" python-multipart
 
     # Dependências de Teste
     pip install pytest httpx

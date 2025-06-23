@@ -2,18 +2,21 @@
 venv/
 .venv/
 env/
-.venv_api/
-
-# Arquivos de ambiente (SEGURANÇA!)
-.env
 
 # Arquivos de cache do Python
 __pycache__/
 *.pyc
+.pytest_cache/
 
-# Arquivos do VS Code
+# Arquivos de IDE
 .vscode/
 
-# Arquivo de update do projeto
-update_project.py
-update_source.txt
+# Arquivos de ambiente (SEGURANÇA!)
+.env
+
+# Arquivos extras
+*.sql
+*.txt
+
+# --- 
+# Arquivo atualizado pelo DomTech Forger em 2025-06-22 23:07:40
