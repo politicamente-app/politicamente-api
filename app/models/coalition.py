@@ -1,6 +1,6 @@
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-30 13:29:06
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-30 13:50:04
 
-from sqlalchemy import Column, String, Integer, ForeignKey, Table
+from sqlalchemy import Column, String, Integer, ForeignKey, Table, UniqueConstraint
 from sqlalchemy.orm import relationship
 from app.db.base_class import Base
 
@@ -19,3 +19,7 @@ class Coalition(Base):
 
     election = relationship("Election")
     parties = relationship("Party", secondary=coalition_parties_association)
+
+    __table_args__ = (
+        UniqueConstraint('nome_coligacao', 'id_eleicao_fk', name='_nome_coligacao_eleicao_uc'),
+    )
