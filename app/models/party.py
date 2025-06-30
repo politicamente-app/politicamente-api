@@ -1,4 +1,4 @@
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-23 16:55:54
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-30 13:29:06
 
 from sqlalchemy import Column, String, Integer
 from app.db.base_class import Base

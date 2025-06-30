@@ -1,4 +1,4 @@
-# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-23 16:55:54
+# Este arquivo foi gerado/atualizado pelo DomTech Forger em 2025-06-30 13:29:06
 
 from app.db.base_class import Base
 from app.db.session import engine
@@ -10,3 +10,4 @@ from app.models.politician import Politician
 from app.models.election import Election
 from app.models.candidacy import Candidacy
 from app.models.vote import Vote
+from app.models.coalition import Coalition, coalition_parties_association
